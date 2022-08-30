@@ -2,6 +2,8 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Coin from "./routes/Coin";
 import Coins from "./routes/Coins";
 import { createGlobalStyle } from "styled-components";
+import { ReactQueryDevtools } from "react-query/devtools";
+import { HelmetProvider } from "react-helmet-async";
 
 const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
@@ -62,12 +64,15 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Coins />}></Route>
-          <Route path="/:coinId/*" element={<Coin />}></Route>
-        </Routes>
-      </BrowserRouter>
+      <HelmetProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Coins />}></Route>
+            <Route path="/:coinId/*" element={<Coin />}></Route>
+          </Routes>
+        </BrowserRouter>
+      </HelmetProvider>
+      <ReactQueryDevtools initialIsOpen={true} />
     </>
   );
 }
